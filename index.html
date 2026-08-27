@@ -13,6 +13,9 @@
             <input type="text" placeholder="Enter city name" spellcheck="false">
             <button><img src="images/search.png"></button>
         </div>
+        <div class="error">
+            <p>Invalid City Name</p>
+        </div>
         <div class="weather">
 
             <img src="images/rain.png" class="weather-icon">
@@ -55,7 +58,6 @@ async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     const data = await response.json();
 
-    console.log(data);
     
     if (data.cod != 200) {
         alert("Kota tidak ditemukan!");
@@ -82,6 +84,8 @@ async function checkWeather(city) {
     else if(data.weather[0].main == "Mist") {
         weatherIcon.src = "images/mist.png";
     }
+
+    document.querySelector(".weather").style.display = "block";
 }
 
 searchBtn.addEventListener("click", ()=> {
